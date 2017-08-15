@@ -1,0 +1,7 @@
+target 'FriendCircleDemo' do
+
+    pod "JSONModel"
+    pod "MBProgressHUD"
+    pod "SDWebImage"
+
+end
