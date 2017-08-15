@@ -48,10 +48,11 @@
 - (void)createTable {
     
     
-    tab_circle = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    tab_circle = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     tab_circle.delegate = self;
     tab_circle.dataSource = self;
-    tab_circle.backgroundColor = [UIColor whiteColor];
+    tab_circle.backgroundColor = [UIColor colorWithRed:241/255.0 green:242/255.0 blue:243/255.0 alpha:1];
+    tab_circle.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:tab_circle];
     
     [self loadData];
@@ -67,31 +68,48 @@
     [connect start];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return dataArr.count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 5;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 0.001;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    
+    return 1;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 45;
+//    return 45;
+    CommetModel *model = dataArr[indexPath.section];
+    
+    return model.cellHeight;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *iden = @"cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:iden];
+    ContentViewCell *cell = [tableView dequeueReusableCellWithIdentifier:iden];
     
     if (!cell) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:iden];
+        cell = [[ContentViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:iden];
     }
     
-    NSDictionary *dic = dataArr[indexPath.row];
+//    NSDictionary *dic = dataArr[indexPath.row];
+//    
+//    cell.textLabel.font = [UIFont systemFontOfSize:14];
+//    cell.textLabel.numberOfLines = 0;
+//    cell.textLabel.lineBreakMode = NSLineBreakByCharWrapping;
+//    cell.textLabel.text = [NSString stringWithFormat:@"%@",dic[@"cmtMsg"]];
     
-    cell.textLabel.font = [UIFont systemFontOfSize:14];
-    cell.textLabel.numberOfLines = 0;
-    cell.textLabel.lineBreakMode = NSLineBreakByCharWrapping;
-    cell.textLabel.text = [NSString stringWithFormat:@"%@",dic[@"cmtMsg"]];
+    cell.model = dataArr[indexPath.section];
     return cell;
     
 }
@@ -115,9 +133,17 @@
         NSArray *comments = jsonDict[@"data"][@"comments"];
         
         if (!dataArr) {
-            dataArr = [[NSMutableArray alloc]initWithArray:comments];
-            [tab_circle reloadData];
+//            dataArr = [[NSMutableArray alloc]initWithArray:comments];
+//            [tab_circle reloadData];
+            dataArr = [NSMutableArray array];
         }
+        
+        for (NSDictionary *dic in comments) {
+            CommetModel *model = [[CommetModel alloc]initWithDictionary:dic error:nil];
+            [dataArr addObject:model];
+        }
+        
+        [tab_circle reloadData];
     }
 }
 
