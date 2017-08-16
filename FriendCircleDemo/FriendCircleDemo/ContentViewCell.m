@@ -7,12 +7,8 @@
 //  Copyright © 2017年 花花. All rights reserved.
 //
 
-#define kScreenWidth [UIScreen mainScreen].bounds.size.width
-#define kScreenHeight [UIScreen mainScreen].bounds.size.height
-
 #import "ContentViewCell.h"
-#import "UIViewExt.h"
-#import <SDWebImage/UIImageView+WebCache.h>
+
 @implementation ContentViewCell
 
 - (void)awakeFromNib {
@@ -40,7 +36,7 @@
         
         //昵称
         self.nickLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.header.right+coorX, self.header.top+5, kScreenWidth-self.header.right-coorX*2, 20)];
-//        self.nickLabel.textColor = [UIColor colorWithRed:59 green:151 blue:184 alpha:1];
+        self.nickLabel.textColor = BlueFontColor;
         self.nickLabel.font = [UIFont systemFontOfSize:14];
         [self.contentView addSubview:self.nickLabel];
         
@@ -53,7 +49,7 @@
         //时间
         self.cmtTimeLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.contentLabel.left, self.contentLabel.bottom+coorX+5, self.contentLabel.width, 15)];
         self.cmtTimeLabel.font = [UIFont systemFontOfSize:11];
-        self.cmtTimeLabel.textColor = [UIColor lightGrayColor];
+        self.cmtTimeLabel.textColor = k99Gray;
         [self.contentView addSubview:self.cmtTimeLabel];
         
     }
@@ -70,7 +66,7 @@
     self.contentLabel.text = model.cmtMsg;
     
     self.cmtTimeLabel.frame = CGRectMake(self.contentLabel.left, self.contentLabel.bottom+15+5, self.contentLabel.width, 15);
-    self.cmtTimeLabel.text = model.cmtTime;
+    self.cmtTimeLabel.text = [NSString stringWithFormat:@"%@ | %lu张图片评论",model.cmtTime,(unsigned long)model.cmtImgs.count];
     
 }
 

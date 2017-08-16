@@ -80,5 +80,5 @@
 
 @property (nonatomic, assign) CGFloat cellHeight;
 @property (nonatomic, assign) CGFloat contentHeight;
-
+@property (nonatomic, copy) NSArray *commentModels;
 @end

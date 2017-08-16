@@ -1,0 +1,26 @@
+//
+//  PrefixHeader.pch
+//  FriendCircleDemo
+//
+//  Created by 花花 on 2017/8/16.
+//  Copyright © 2017年 花花. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import "UIViewExt.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+
+#define kScreenWidth [UIScreen mainScreen].bounds.size.width
+#define kScreenHeight [UIScreen mainScreen].bounds.size.height
+#define kNavigationBarHeight 64
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+#define k99Gray [UIColor colorWithRed:153.f/255 green:153.f/255 blue:153.f/255 alpha:1.00f]
+#define K33Color UIColorFromRGB(0x333333)
+#define BlueFontColor [UIColor colorWithRed:38.f/255 green:143.f/255 blue:254.f/255 alpha:1.0]
+
+
+#endif /* PrefixHeader_pch */

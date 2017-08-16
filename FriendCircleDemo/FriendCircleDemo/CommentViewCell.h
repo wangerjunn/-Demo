@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CommentContentModel.h"
 
 @interface CommentViewCell : UITableViewCell
+
+@property (nonatomic, strong) UIView *grayView;
+@property (nonatomic, strong) UITextView *commentLabel;
+
+@property (nonatomic, copy) CommentContentModel *model;
+@property (nonatomic, copy) void(^ClickMemberName)(CommentContentModel *cmtModel);
 
 @end

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		49741ABCAB5F9E20E66A9452 /* libPods-FriendCircleDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AAFE9A526F8C07265B5C8010 /* libPods-FriendCircleDemo.a */; };
+		666CFAB81F44153000D48269 /* TestImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 666CFAB71F44153000D48269 /* TestImageViewController.m */; };
+		666CFABC1F442C6900D48269 /* CommentContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 666CFABB1F442C6900D48269 /* CommentContentModel.m */; };
+		666CFAC01F44467B00D48269 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 666CFABF1F44467B00D48269 /* WebViewController.m */; };
 		66E7B9291F42E94E00AA6512 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 66E7B9281F42E94E00AA6512 /* main.m */; };
 		66E7B92C1F42E94E00AA6512 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 66E7B92B1F42E94E00AA6512 /* AppDelegate.m */; };
 		66E7B92F1F42E94E00AA6512 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66E7B92E1F42E94E00AA6512 /* ViewController.m */; };
@@ -42,6 +45,13 @@
 /* Begin PBXFileReference section */
 		11C8893CC0221AE87D886A7E /* Pods-FriendCircleDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FriendCircleDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FriendCircleDemo/Pods-FriendCircleDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		30129CE6331B7AE48383ABE9 /* Pods-FriendCircleDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FriendCircleDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-FriendCircleDemo/Pods-FriendCircleDemo.release.xcconfig"; sourceTree = "<group>"; };
+		666CFAB61F44153000D48269 /* TestImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestImageViewController.h; sourceTree = "<group>"; };
+		666CFAB71F44153000D48269 /* TestImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestImageViewController.m; sourceTree = "<group>"; };
+		666CFAB91F4417E200D48269 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		666CFABA1F442C6900D48269 /* CommentContentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentContentModel.h; sourceTree = "<group>"; };
+		666CFABB1F442C6900D48269 /* CommentContentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentContentModel.m; sourceTree = "<group>"; };
+		666CFABE1F44467B00D48269 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		666CFABF1F44467B00D48269 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		66E7B9241F42E94E00AA6512 /* FriendCircleDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FriendCircleDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66E7B9281F42E94E00AA6512 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		66E7B92A1F42E94E00AA6512 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -141,6 +151,7 @@
 				66E7B92B1F42E94E00AA6512 /* AppDelegate.m */,
 				66E7B9661F42FFBB00AA6512 /* UIViewExt.h */,
 				66E7B9671F42FFBB00AA6512 /* UIViewExt.m */,
+				666CFAB91F4417E200D48269 /* PrefixHeader.pch */,
 				66E7B95A1F42F8BA00AA6512 /* ViewControllers */,
 				66E7B95B1F42F8C800AA6512 /* Models */,
 				66E7B95C1F42F8D100AA6512 /* Views */,
@@ -184,6 +195,10 @@
 			children = (
 				66E7B92D1F42E94E00AA6512 /* ViewController.h */,
 				66E7B92E1F42E94E00AA6512 /* ViewController.m */,
+				666CFABE1F44467B00D48269 /* WebViewController.h */,
+				666CFABF1F44467B00D48269 /* WebViewController.m */,
+				666CFAB61F44153000D48269 /* TestImageViewController.h */,
+				666CFAB71F44153000D48269 /* TestImageViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -193,6 +208,8 @@
 			children = (
 				66E7B95D1F42F8FF00AA6512 /* CommetModel.h */,
 				66E7B95E1F42F8FF00AA6512 /* CommetModel.m */,
+				666CFABA1F442C6900D48269 /* CommentContentModel.h */,
+				666CFABB1F442C6900D48269 /* CommentContentModel.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -396,11 +413,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				66E7B9681F42FFBB00AA6512 /* UIViewExt.m in Sources */,
+				666CFAC01F44467B00D48269 /* WebViewController.m in Sources */,
 				66E7B9651F42F99000AA6512 /* CommentViewCell.m in Sources */,
 				66E7B92F1F42E94E00AA6512 /* ViewController.m in Sources */,
 				66E7B92C1F42E94E00AA6512 /* AppDelegate.m in Sources */,
+				666CFABC1F442C6900D48269 /* CommentContentModel.m in Sources */,
 				66E7B95F1F42F8FF00AA6512 /* CommetModel.m in Sources */,
 				66E7B9291F42E94E00AA6512 /* main.m in Sources */,
+				666CFAB81F44153000D48269 /* TestImageViewController.m in Sources */,
 				66E7B9621F42F91D00AA6512 /* ContentViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -554,7 +574,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = JEHZ3ESUU9;
+				GCC_PREFIX_HEADER = FriendCircleDemo/PrefixHeader.pch;
 				INFOPLIST_FILE = FriendCircleDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = hzd.coup.com.FriendCircleDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -567,7 +589,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = JEHZ3ESUU9;
+				GCC_PREFIX_HEADER = FriendCircleDemo/PrefixHeader.pch;
 				INFOPLIST_FILE = FriendCircleDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = hzd.coup.com.FriendCircleDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
