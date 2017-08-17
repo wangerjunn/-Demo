@@ -1,6 +1,7 @@
 PODS:
   - JSONModel (1.7.0)
   - MBProgressHUD (1.0.0)
+  - MJRefresh (3.1.12)
   - SDWebImage (4.1.0):
     - SDWebImage/Core (= 4.1.0)
   - SDWebImage/Core (4.1.0)
@@ -8,13 +9,15 @@ PODS:
 DEPENDENCIES:
   - JSONModel
   - MBProgressHUD
+  - MJRefresh
   - SDWebImage
 
 SPEC CHECKSUMS:
   JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   SDWebImage: 0e435c14e402a6730315a0fb79f95e68654d55a4
 
-PODFILE CHECKSUM: 3a3e532910daa428e1f71d8e32416dcf6444be25
+PODFILE CHECKSUM: 6f6d30cd79f4d6774ead92afaa64a9363363331e
 
 COCOAPODS: 1.1.1

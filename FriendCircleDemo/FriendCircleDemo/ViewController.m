@@ -18,6 +18,9 @@
 #import "ContentViewCell.h"
 #import "CommentViewCell.h"
 
+//
+#import <MJRefresh/MJRefresh.h>
+
 @interface ViewController () <
     NSURLConnectionDelegate,
     NSURLConnectionDataDelegate,
@@ -26,6 +29,7 @@
 {
     UITableView *tab_circle;
     NSMutableArray *dataArr;
+    NSInteger pageNum;
 }
 @end
 
@@ -59,12 +63,17 @@
     tab_circle.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:tab_circle];
     
-    [self loadData];
+    tab_circle.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        pageNum = 0;
+        [self loadData];
+    }];
+    
+    [tab_circle.mj_header beginRefreshing];
 }
 
 - (void)loadData {
     
-    NSString *url = @"https://api.bestudent.cn/app/school/major/comment/list.action?from=ios&memberId=2165&pageNum=1&pageSize=5&version=1.9.0";
+    NSString *url = [NSString stringWithFormat:@"https://api.bestudent.cn/app/school/major/comment/list.action?from=ios&memberId=2165&pageNum=%ld&pageSize=5&version=1.9.0",(long)pageNum];
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     NSURLConnection *connect = [NSURLConnection connectionWithRequest:request delegate:self];
@@ -153,10 +162,22 @@
     cell.model = tmpModel;
     
     //点击人物姓名block
-    cell.ClickMemberName = ^(CommentContentModel *cmtModel) {
+    cell.ClickMemberName = ^(CommentContentModel *cmtModel,NSInteger type) {
+        
+        
         WebViewController *webVC = [[WebViewController alloc]init];
-        webVC.navTitle = cmtModel.replyMemberFromName;
-        webVC.httpUrl = @"https://www.baidu.com";
+        
+        if (type == 0) {
+            //回复人
+            webVC.navTitle = cmtModel.replyMemberFromName;
+            webVC.httpUrl = @"https://www.baidu.com";
+        }else{
+            //被回复人
+            webVC.navTitle = cmtModel.replyMemberToName;
+            webVC.httpUrl = @"http://news.qq.com";
+        }
+        
+        
         [self.navigationController pushViewController:webVC animated:YES];
     };
     
@@ -193,6 +214,21 @@
             dataArr = [NSMutableArray array];
         }
         
+        if (pageNum == 0) {
+            [dataArr removeAllObjects];
+        }
+        
+        if (comments.count < 5) {
+            tab_circle.mj_footer = nil;
+        }else{
+            if (!tab_circle.mj_footer) {
+                
+                tab_circle.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+                    pageNum++;
+                    [self loadData];
+                }];
+            }
+        }
         for (NSDictionary *dic in comments) {
             CommetModel *model = [[CommetModel alloc]initWithDictionary:dic error:nil];
             [dataArr addObject:model];
@@ -210,6 +246,12 @@
         }
         
         [tab_circle reloadData];
+        
+        [tab_circle.mj_footer endRefreshing];
+        [tab_circle.mj_header endRefreshing];
+    }else{
+        [tab_circle.mj_header endRefreshing];
+        [tab_circle.mj_footer endRefreshing];
     }
 }
 

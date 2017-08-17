@@ -72,10 +72,17 @@
     
     _grayView.frame = CGRectMake(_grayView.left, _grayView.top, _grayView.width, model.contentHeight+10);
     _commentLabel.text = [NSString stringWithFormat:@"%@:%@",model.replyMemberFromName?model.replyMemberFromName:@"",model.replyMsg?model.replyMsg:@""];
+    if (model.replyMemberToName) {
+        _commentLabel.text = [NSString stringWithFormat:@"%@回复%@:%@",model.replyMemberFromName?model.replyMemberFromName:@"",model.replyMemberToName,model.replyMsg?model.replyMsg:@""];
+    }
     NSMutableAttributedString *attri = [[NSMutableAttributedString alloc]initWithString:_commentLabel.text];
     
     NSRange range = [_commentLabel.text rangeOfString:model.replyMemberFromName];
-    
+    if (model.replyMemberToName) {
+        NSRange replyRange = [_commentLabel.text rangeOfString:model.replyMemberToName];
+        [attri addAttribute:NSForegroundColorAttributeName value:BlueFontColor range:replyRange];
+        [attri addAttribute:NSLinkAttributeName value:[NSURL URLWithString:@"http://news.qq.com"] range:replyRange];
+    }
     [attri addAttribute:NSForegroundColorAttributeName value:BlueFontColor range:range];
     [attri addAttribute:NSLinkAttributeName value:[NSURL URLWithString:@"https://www.baidu.com"] range:range];
     
@@ -90,7 +97,13 @@
     NSLog(@"url = %@",URL.absoluteString);
     if (URL.absoluteString) {
         if (self.ClickMemberName) {
-            self.ClickMemberName(_model);
+            
+            if ([URL.absoluteString containsString:@"baidu"]) {
+                self.ClickMemberName(_model,0);
+            }else{
+                self.ClickMemberName(_model,1);
+            }
+            
         }
     }
     return NO;

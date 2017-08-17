@@ -3,5 +3,6 @@ target 'FriendCircleDemo' do
     pod "JSONModel"
     pod "MBProgressHUD"
     pod "SDWebImage"
+    pod "MJRefresh"
 
 end

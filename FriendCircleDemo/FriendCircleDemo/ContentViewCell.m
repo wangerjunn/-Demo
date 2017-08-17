@@ -96,6 +96,8 @@
         self.cmtTimeLabel.frame = CGRectMake(self.contentLabel.left, self.collection.bottom+15, self.contentLabel.width, 15);
         [_collection reloadData];
     }else{
+        
+        _collection.frame = CGRectZero;
         self.cmtTimeLabel.frame = CGRectMake(self.contentLabel.left, self.contentLabel.bottom+15+5, self.contentLabel.width, 15);
     }
     

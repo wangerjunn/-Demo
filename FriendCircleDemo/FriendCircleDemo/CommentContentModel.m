@@ -19,7 +19,9 @@
     if (self = [super initWithDictionary:dict error:err]) {
         
         NSString *msg = [NSString stringWithFormat:@"%@:%@",_replyMemberFromName?_replyMemberFromName:@"",_replyMsg?_replyMsg:@""];
-        
+        if (_replyMemberToName) {
+            msg = [NSString stringWithFormat:@"%@回复%@:%@",_replyMemberFromName?_replyMemberFromName:@"",_replyMemberToName,_replyMsg?_replyMsg:@""];
+        }
         NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
         paragraph.lineSpacing = 4;
         

@@ -23,6 +23,7 @@
 @property (nonatomic, copy) NSNumber *applicationId;
 @property (nonatomic, copy) NSNumber *cmtMemberId;
 @property (nonatomic, copy) NSString *replyMemberFromName;//评论人
+@property (nonatomic, copy) NSString *replyMemberToName;//被回复人
 @property (nonatomic, copy) NSString *replyMsg;//评论内容
 
 @property (nonatomic, assign) CGFloat contentHeight;
