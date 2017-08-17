@@ -41,23 +41,42 @@
     scr.showsVerticalScrollIndicator = NO;
     scr.showsHorizontalScrollIndicator = NO;
     scr.pagingEnabled = YES;
-    scr.contentSize = CGSizeMake(kScreenWidth*3, scr.height);
+    scr.maximumZoomScale = 2;
+//    scr.contentSize = CGSizeMake(kScreenWidth*3, scr.height);
     [self.view addSubview:scr];
     
-    NSArray *colors = @[[UIColor orangeColor],[UIColor lightGrayColor],[UIColor purpleColor]];
-    for (int i = 0; i < colors.count; i ++) {
-        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(kScreenWidth*i, 0, scr.width, scr.height)];;
-        [scr addSubview:view];
-        UILabel *label = [[UILabel alloc]initWithFrame:view.bounds];
-        label.textAlignment = NSTextAlignmentCenter;
-        label.text = [NSString stringWithFormat:@"%d",i+1];
-        label.font = [UIFont systemFontOfSize:40];
-        label.textColor = [UIColor whiteColor];
-        [view addSubview:label];
-        view.backgroundColor = colors[i];
-        
-        
-    }
+    UIImageView *img = [[UIImageView alloc]initWithFrame:scr.bounds];
+    img.userInteractionEnabled = YES;
+    [img sd_setImageWithURL:[NSURL URLWithString:_url] placeholderImage:[UIImage imageNamed:kPlaceHolderImage] options:0 progress:NULL completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        if (!error) {
+            img.image = image;
+        }
+    }];
+//    [img sd_setImageWithURL:[NSURL URLWithString:_url] placeholderImage:[UIImage imageNamed:kPlaceHolderImage]];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickScaleImg:)];
+    tap.numberOfTapsRequired = 2;
+    [img addGestureRecognizer:tap];
+    [scr addSubview:img];
+    
+//    NSArray *colors = @[[UIColor orangeColor],[UIColor lightGrayColor],[UIColor purpleColor]];
+//    for (int i = 0; i < colors.count; i ++) {
+//        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(kScreenWidth*i, 0, scr.width, scr.height)];;
+//        [scr addSubview:view];
+//        UILabel *label = [[UILabel alloc]initWithFrame:view.bounds];
+//        label.textAlignment = NSTextAlignmentCenter;
+//        label.text = [NSString stringWithFormat:@"%d",i+1];
+//        label.font = [UIFont systemFontOfSize:40];
+//        label.textColor = [UIColor whiteColor];
+//        [view addSubview:label];
+//        view.backgroundColor = colors[i];
+//        
+//        
+//    }
+}
+
+- (void)clickScaleImg:(UITapGestureRecognizer *)tap {
+    
 }
 
 - (void)didReceiveMemoryWarning {

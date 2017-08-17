@@ -16,5 +16,6 @@
 
 @property (nonatomic, copy) CommentContentModel *model;
 @property (nonatomic, copy) void(^ClickMemberName)(CommentContentModel *cmtModel);
+@property (nonatomic, copy) void(^clickCommentContent)();
 
 @end

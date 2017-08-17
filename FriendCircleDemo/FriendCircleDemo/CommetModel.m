@@ -31,7 +31,24 @@
             _contentHeight = size_con.height+5;
         }
         
+        _imgHeight = 0;
+        if (_cmtImgs.count > 0) {
+            NSInteger row = _cmtImgs.count / 3;
+            NSInteger rank = _cmtImgs.count % 3;
+            
+            if (rank > 0) {
+                row += 1;
+            }
+            
+            CGFloat wdtImg = (kScreenWidth-90 - 10)/3.0;
+            _imgHeight = row * wdtImg + (row-1)*5;
+        }
+        
         _cellHeight = 20 + 20+ 15 +_contentHeight + 20 + 15 + 15;
+        
+        if (_imgHeight > 0) {
+            _cellHeight += _cellHeight + 15;
+        }
     }
     
     return self;

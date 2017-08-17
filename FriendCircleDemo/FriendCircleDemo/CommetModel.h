@@ -70,6 +70,7 @@
 
 @property (nonatomic, copy) NSNumber *applicationId;
 @property (nonatomic, copy) NSNumber *cmtId;
+@property (nonatomic, copy) NSArray *cmtThumbImgs;//缩略图
 @property (nonatomic, copy) NSArray *cmtImgs;//评论图片
 @property (nonatomic, copy) NSString *cmtMsg;//评论内容
 @property (nonatomic, copy) NSArray *cmtReplys;//评论数组
@@ -78,6 +79,7 @@
 @property (nonatomic, copy) NSString *memberHead;//头像
 @property (nonatomic, copy) NSString *memberName;//昵称
 
+@property (nonatomic, assign) CGFloat imgHeight;
 @property (nonatomic, assign) CGFloat cellHeight;
 @property (nonatomic, assign) CGFloat contentHeight;
 @property (nonatomic, copy) NSArray *commentModels;

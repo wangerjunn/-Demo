@@ -9,6 +9,15 @@
 
 #import "ContentViewCell.h"
 
+@interface ContentViewCell () <
+    UICollectionViewDelegate,
+    UICollectionViewDataSource>
+{
+    
+}
+
+@end
+
 @implementation ContentViewCell
 
 - (void)awakeFromNib {
@@ -40,11 +49,28 @@
         self.nickLabel.font = [UIFont systemFontOfSize:14];
         [self.contentView addSubview:self.nickLabel];
         
+        //内容
         self.contentLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.nickLabel.left, self.nickLabel.bottom+coorX, self.nickLabel.width, 20)];
         self.contentLabel.font = [UIFont systemFontOfSize:15];
         self.contentLabel.numberOfLines = 0;
         self.contentLabel.lineBreakMode = NSLineBreakByClipping;
         [self.contentView addSubview:self.contentLabel];
+        
+        //照片
+        
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
+        
+        CGFloat wdtImg = (self.contentLabel.width-10)/3.0;
+        
+        layout.itemSize = CGSizeMake(wdtImg, wdtImg);
+        layout.minimumLineSpacing = 5;
+        layout.minimumInteritemSpacing = 0;
+        _collection = [[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:layout];
+        [_collection registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cmtImg"];
+        _collection.delegate = self;
+        _collection.dataSource = self;
+        _collection.backgroundColor = [UIColor whiteColor];
+        [self.contentView addSubview:_collection];
         
         //时间
         self.cmtTimeLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.contentLabel.left, self.contentLabel.bottom+coorX+5, self.contentLabel.width, 15)];
@@ -65,9 +91,57 @@
     self.contentLabel.frame = CGRectMake(self.contentLabel.left, self.contentLabel.top, self.contentLabel.width, model.contentHeight);
     self.contentLabel.text = model.cmtMsg;
     
-    self.cmtTimeLabel.frame = CGRectMake(self.contentLabel.left, self.contentLabel.bottom+15+5, self.contentLabel.width, 15);
+    if (model.imgHeight > 0) {
+        _collection.frame = CGRectMake(_contentLabel.left, _contentLabel.bottom+15+5, _contentLabel.width, model.imgHeight);
+        self.cmtTimeLabel.frame = CGRectMake(self.contentLabel.left, self.collection.bottom+15, self.contentLabel.width, 15);
+        [_collection reloadData];
+    }else{
+        self.cmtTimeLabel.frame = CGRectMake(self.contentLabel.left, self.contentLabel.bottom+15+5, self.contentLabel.width, 15);
+    }
+    
     self.cmtTimeLabel.text = [NSString stringWithFormat:@"%@ | %lu张图片评论",model.cmtTime,(unsigned long)model.cmtImgs.count];
     
+    
+    
+}
+
+#pragma mark -- UICollectionViewDelegate
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return _model.cmtImgs.count;
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *iden = @"cmtImg";
+    
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:iden forIndexPath:indexPath];
+    
+    if (!cell) {
+        CGFloat wdtImg = (self.contentLabel.width-10)/3.0;
+        cell = [[UICollectionViewCell alloc]initWithFrame:CGRectMake(0, 0, wdtImg, wdtImg)];
+    }
+    
+    UIImageView *img = (UIImageView *)[cell.contentView viewWithTag:100];
+    if (!img) {
+        img = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, cell.width, cell.height)];
+        img.tag = 100;
+        
+        [cell.contentView addSubview:img];
+    }
+    NSString *url = _model.cmtThumbImgs[indexPath.item];
+    url = @"http://qsx-app.img-cn-beijing.aliyuncs.com/major_comment/2748/3734/cmt_img_1470988109948.png@!dynamic_style";
+    [img sd_setImageWithURL:[NSURL URLWithString:url?url:@""] placeholderImage:[UIImage imageNamed:kPlaceHolderImage]];
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *url = _model.cmtImgs[indexPath.item];
+    if (self.clickImageBlock) {
+        self.clickImageBlock(url);
+    }
 }
 
 @end

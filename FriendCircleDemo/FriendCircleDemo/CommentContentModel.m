@@ -20,8 +20,12 @@
         
         NSString *msg = [NSString stringWithFormat:@"%@:%@",_replyMemberFromName?_replyMemberFromName:@"",_replyMsg?_replyMsg:@""];
         
-        NSDictionary * attributes = @{NSFontAttributeName : [UIFont systemFontOfSize:12]};
-        CGSize size_con = [msg boundingRectWithSize:CGSizeMake(kScreenWidth-90-10, 10000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attributes context:nil].size;
+        NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+        paragraph.lineSpacing = 4;
+        
+        NSDictionary * attributes = @{NSFontAttributeName : [UIFont systemFontOfSize:12],
+                                      NSParagraphStyleAttributeName:paragraph };
+        CGSize size_con = [msg boundingRectWithSize:CGSizeMake(kScreenWidth-90-13, 10000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attributes context:nil].size;
         
         _contentHeight = size_con.height+5;
     }

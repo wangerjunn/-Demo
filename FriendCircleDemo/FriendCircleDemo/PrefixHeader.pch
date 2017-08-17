@@ -21,6 +21,6 @@
 #define k99Gray [UIColor colorWithRed:153.f/255 green:153.f/255 blue:153.f/255 alpha:1.00f]
 #define K33Color UIColorFromRGB(0x333333)
 #define BlueFontColor [UIColor colorWithRed:38.f/255 green:143.f/255 blue:254.f/255 alpha:1.0]
-
+#define kPlaceHolderImage @"placeHolderImage"
 
 #endif /* PrefixHeader_pch */

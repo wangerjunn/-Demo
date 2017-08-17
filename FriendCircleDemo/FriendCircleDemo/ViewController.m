@@ -131,6 +131,11 @@
             cell = [[ContentViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:iden];
         }
         
+        cell.clickImageBlock = ^(NSString *url) {
+            TestImageViewController *image = [[TestImageViewController alloc]init];
+            image.url = url;
+            [self.navigationController pushViewController:image animated:YES];
+        };
         cell.model = dataArr[indexPath.section];
         return cell;
     }
@@ -146,23 +151,29 @@
     CommetModel * model = dataArr[indexPath.section];
     CommentContentModel *tmpModel = model.commentModels[indexPath.row-1];
     cell.model = tmpModel;
+    
+    //点击人物姓名block
     cell.ClickMemberName = ^(CommentContentModel *cmtModel) {
         WebViewController *webVC = [[WebViewController alloc]init];
         webVC.navTitle = cmtModel.replyMemberFromName;
         webVC.httpUrl = @"https://www.baidu.com";
         [self.navigationController pushViewController:webVC animated:YES];
     };
+    
+    //点击评论内容block
+    cell.clickCommentContent = ^{
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"点击评论内容"
+                                                       message:tmpModel.replyMsg
+                                                      delegate:nil
+                                             cancelButtonTitle:@"取消"
+                                             otherButtonTitles:@"确定", nil];
+        
+        [alert show];
+        
+    };
     return cell;
     
 }
-
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    
-////    if (indexPath.row > 0) {
-////        //点击评论
-////    }
-//}
 
 #pragma mark -- NSURLConnectionDelegate
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {

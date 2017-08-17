@@ -43,6 +43,11 @@
         self.commentLabel.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0);
         self.commentLabel.delegate = self;
 //        self.commentLabel.numberOfLines = 0;
+        self.commentLabel.userInteractionEnabled = YES;
+//        self.commentLabel.textContainer.size = CGSizeMake(self.commentLabel.width, self.commentLabel.height);
+        self.commentLabel.inputView.backgroundColor = [UIColor redColor];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapCommnetContent:)];
+        [self.commentLabel addGestureRecognizer:tap];
         self.commentLabel.editable = NO;
         self.commentLabel.textColor = K33Color;
 //        self.commentLabel.lineBreakMode = NSLineBreakByCharWrapping;
@@ -51,6 +56,13 @@
     }
     
     return self;
+}
+
+- (void)tapCommnetContent:(UITapGestureRecognizer *)tap {
+    NSLog(@"点击评论内容");
+    if (self.clickCommentContent) {
+        self.clickCommentContent();
+    }
 }
 
 - (void)setModel:(CommentContentModel *)model {
@@ -66,6 +78,10 @@
     
     [attri addAttribute:NSForegroundColorAttributeName value:BlueFontColor range:range];
     [attri addAttribute:NSLinkAttributeName value:[NSURL URLWithString:@"https://www.baidu.com"] range:range];
+    
+    NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+    paragraph.lineSpacing = 4;
+    [attri addAttribute:NSParagraphStyleAttributeName value:paragraph range:NSMakeRange(0, _commentLabel.text.length)];
     _commentLabel.attributedText = attri;
 }
 

@@ -10,4 +10,5 @@
 
 @interface TestImageViewController : UIViewController
 
+@property (nonatomic, copy) NSString *url;
 @end

@@ -16,6 +16,8 @@
 @property (nonatomic, strong) UILabel *contentLabel;
 @property (nonatomic, strong) UILabel *cmtTimeLabel;
 
+@property (nonatomic, strong) UICollectionView *collection;
 @property (nonatomic, copy) CommetModel *model;
+@property (nonatomic, copy) void(^clickImageBlock)(NSString *url);
 
 @end
